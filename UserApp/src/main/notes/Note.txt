@@ -1,0 +1,73 @@
+	The property resilience4j.circuitbreaker.instances.ratingHotelBreaker.register-health-indicator=true 
+configures whether Resilience4j should register a health indicator for the specified CircuitBreaker instance
+(ratingHotelBreaker in this case) with Spring Boot Actuator.
+	When set to true, Resilience4j will automatically register a health indicator for the CircuitBreaker instance, 
+allowing you to monitor its health status via Spring Boot Actuator endpoints like /actuator/health.
+The health indicator provides information about the current state of the CircuitBreaker, 
+such as whether it's open, closed, or half-open, which can be useful for monitoring and 
+managing the resilience of your application.
+	This property is particularly useful when you're using Spring Boot Actuator for monitoring your 
+application's health and want to include information about the health of your CircuitBreakers as part of 
+the overall health status.
+
+
+
+
+Circuit Breaker Pattern
+As in the above example, we have seen that service B is slow due to which service C also becomes slow.
+So to avoid this, we can first detect where the problem is and then stop calling that component for some 
+amount of time. Basically, we have to deactivate that component which gives a problem for some time.
+This pattern is called Circuit Breaker pattern as we are breaking the call to the service which gives 
+a problem for a certain amount of time and then again resuming.
+
+1)Retry Design Pattern
+In this pattern, we can retry the connection which has failed earlier. 
+This is useful for temporary issues. A lot of times a simple retry might fix the issue.
+
+2)Timeout Design Pattern
+
+3)Bulkhead Pattern
+
+
+
+Resilience4j supports both count-based and time-based circuit breakers.
+We specify the type of circuit breaker using the slidingWindowType() configuration. 
+This configuration can take one of two values - SlidingWindowType.COUNT_BASED or SlidingWindowType.TIME_BASED.
+
+failureRateThreshold() and slowCallRateThreshold() configure the failure rate threshold and the slow call rate in percentage.
+
+slowCallDurationThreshold() configures the time in seconds beyond which a call is considered slow.
+
+We can specify a minimumNumberOfCalls() that are required before the circuit breaker can calculate the error rate or slow call rate.
+
+As mentioned earlier, the circuit breaker switches from the open state to the half-open state after 
+a certain time to check how the remote service is doing. waitDurationInOpenState() specifies the time 
+that the circuit breaker should wait before switching to a half-open state.
+
+permittedNumberOfCallsInHalfOpenState() configures the number of calls that will be allowed in the half-open state 
+and maxWaitDurationInHalfOpenState() determines the amount of time a circuit breaker can stay in the half-open 
+state before switching back to the open state.
+
+By default, the circuit breaker considers any Exception as a failure. But we can tweak this to specify a list of Exceptions that should be treated as a failure using the recordExceptions() configuration and a list of Exceptions to be ignored using the ignoreExceptions() configuration.
+If we want even finer control when determining if an Exception should be treated as a failure or ignored, we can provide a Predicate<Throwable> as a recordException() or ignoreException() configuration.
+The circuit breaker throws a CallNotPermittedException when it is rejecting calls in the open state. We can control the amount of information in the stack trace of a CallNotPermittedException using the writablestacktraceEnabled() configuration.
+
+------------------------------------------------
+
+
+
+
+resilience4j.ratelimiter.instances.userRateLimiter.limit-refresh-period=4s
+resilience4j.ratelimiter.instances.userRateLimiter.limit-for-period=2
+resilience4j.ratelimiter.instances.userRateLimiter.timeout-duration=2s
+
+
+resilience4j.ratelimiter.instances.userRateLimiter.limit-refresh-period=4s 
+sets the refresh period for the rate limiter named userRateLimiter in Resilience4j.
+In Resilience4j, the rate limiter limits the rate at which calls are allowed to proceed based on the configured rate limit. The limit-refresh-period property specifies how often the rate limiter should refresh its limit, allowing for dynamic rate limit changes without restarting the application.
+In this case, 4s indicates a refresh period of 4 seconds. This means that every 4 seconds, the rate limiter will refresh its limit based on the most recent configuration. If the rate limit is changed during runtime (e.g., through dynamic configuration updates), it will take effect within the next refresh period.
+This configuration is useful for scenarios where you need to dynamically adjust rate limits based on changing conditions or requirements, without the need for application restarts. It allows for more flexible and responsive rate limiting behavior in your application.
+This property sets the refresh period for the rate limiter. It specifies how often the rate limiter should refresh its limit. In this case, it's set to 4 seconds (4s), meaning the rate limiter will refresh its limit every 4 seconds.
+
+resilience4j.ratelimiter.instances.userRateLimiter.limit-for-period=2: This property sets the rate limit for the rate limiter. It defines the maximum number of calls allowed within the defined period. In this case, the rate limit is set to 2 calls (2), meaning that within the period defined by the rate limiter (usually per second), a maximum of 2 calls are allowed.
+resilience4j.ratelimiter.instances.userRateLimiter.timeout-duration=2s: This property sets the timeout duration for waiting for permission from the rate limiter. If a call is not granted permission within this timeout duration, a RateLimiterTimeoutException will be thrown. In this case, the timeout duration is set to 2 seconds (2s).
