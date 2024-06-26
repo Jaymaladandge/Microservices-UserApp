@@ -24,7 +24,7 @@ public class MyConfig {
 	  
 	  The @LoadBalanced annotation essentially wraps the RestTemplate with a LoadBalancerInterceptor.
 	  
-	  
+	   
 	*/
 	
 }
