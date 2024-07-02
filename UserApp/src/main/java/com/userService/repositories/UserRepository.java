@@ -33,3 +33,35 @@ public interface UserRepository extends JpaRepository<User, String> {
 	//Custom finder
 	public User findByNameAndUserId(String name, int userId);
 }
+
+
+//The @Modifying annotation is used to enhance the @Query annotation so that we can execute not only SELECT queries, 
+//but also INSERT, UPDATE, DELETE, and even DDL queries.
+//Methods using @Modifying should be executed within a transactional context, which is why the @Transactional annotation 
+//is often used. This ensures the operation is executed as part of a transaction.
+
+
+
+//In Custom finder we just need to follow method convention. method starts with findBy and follow by property name.
+
+//Spring uses its @Repository annotation to automatically translate persistence-related exceptions into Spring's own 
+//DataAccessException hierarchy. This means that regardless of the underlying data access technology (JPA, JDBC, etc.), 
+//you can handle data access exceptions in a consistent manner.
+
+
+//No Need for @Repository. when you extend JpaRepository, this is handled by the Spring Data infrastructure. The proxy 
+//that Spring Data creates for the repository interface is already marked as a repository 
+//and will participate in exception translation.
+
+
+
+
+//When a method is indicated with @Transactional annotation, it indicates that the particular method should be executed 
+//within the context of that transaction. If the transaction becomes successful then the changes made to the database 
+//are committed, if any transaction fails, all the changes made to that particular transaction can be rollback and it 
+//will ensure that the database remains in a consistent state.
+
+//Note: To use @Transactional annotation, you need to configure transaction management by using @EnableTransactionManagement 
+//to your main class of Spring Boot application.
+// By default, only unchecked exceptions (subclasses of RuntimeException) trigger a rollback. 
+//You can customize this behavior using the rollbackFor and noRollbackFor attributes.

@@ -150,6 +150,8 @@ public class UserServiceImpl implements UserService {
 		// Update data with RestTemplate (providing data with @PathVariable &
 		// @RequestBody)
 
+		logger.info("=================inside updateUser=================" + user+"========"+userId);
+		
 		Ratings ratings = Ratings.builder().feedback("very good").rating("5").build();
 
 		MultiValueMap<String, String> headers = new LinkedMultiValueMap<String, String>();
@@ -159,7 +161,7 @@ public class UserServiceImpl implements UserService {
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		map.put("ratingId", 3);
 
-		ResponseEntity<Ratings> updatedRating = restTemplate.exchange("http://localhost:9092/rating/update/{ratingId}",
+		ResponseEntity<Ratings> updatedRating = restTemplate.exchange("http://RATING-APP/rating/update/{ratingId}",
 				HttpMethod.PUT, requestEntity, Ratings.class, map);
 		logger.info("===============updatedRating in updateUser()==================" + updatedRating.getBody());
 		List<Ratings> list = new ArrayList<Ratings>();
@@ -190,7 +192,7 @@ public class UserServiceImpl implements UserService {
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		HttpEntity<Ratings> httpEntity = new HttpEntity<Ratings>(rating, headers);
 
-		ResponseEntity<String> entity = restTemplate.exchange("http://localhost:9092/rating/update", HttpMethod.POST,
+		ResponseEntity<String> entity = restTemplate.exchange("http://RATING-APP/rating/update", HttpMethod.POST,
 				httpEntity, String.class);
 
 		if (entity.getStatusCode().is2xxSuccessful()) {

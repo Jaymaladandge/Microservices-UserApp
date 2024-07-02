@@ -37,3 +37,9 @@ public class User {
 	private List<Ratings> ratings =new ArrayList<Ratings>();
 
 }
+
+
+//@Transient annotation is used to indicate that a particular field of a class should not be persisted in the database. 
+//This annotation is applied to fields or properties of an entity class and tells the persistence provider to ignore that 
+//field when performing persistence operations.
+//Fields that are part of business logic but not part of the database schema can be annotated with @Transient.

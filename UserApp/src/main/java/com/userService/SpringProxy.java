@@ -19,6 +19,10 @@ CGLIB Proxies: These are used when the target class does not implement an interf
 The proxy subclass the target class and overrides its methods to add the aspect behavior.
 
 
+//the proxy mechanism only works when calls come in from some external object. When you make an internal call within the 
+object, you're really making a call through the this reference, which bypasses the proxy. 
+
+
 The Self-invocation Problem
 When a method within the same bean calls another method annotated for a cross-cutting concern (e.g., @Transactional, @Cacheable), 
 the call is a direct method invocation, bypassing the proxy. This means that the aspects are 
