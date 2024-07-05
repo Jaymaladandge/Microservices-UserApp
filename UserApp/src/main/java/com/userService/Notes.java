@@ -3,6 +3,31 @@ package com.userService;
 public class Notes {
 /*
 	
+There are two primary types of communication methods used in microservices: synchronous and asynchronous. 	
+
+1. Synchronous Communication
+In synchronous communication, the client sends a request and waits for a response from the server before proceeding. 
+This type of communication is typically used when an immediate response is required.
+	
+2. Asynchronous Communication
+In asynchronous communication, the client sends a request without waiting for an immediate response. Instead, 
+the response is processed whenever it becomes available. This type of communication is useful for decoupling services and 
+improving system resilience.	
+	
+RestTemplate: 
+Used for synchronous communication in Spring applications. The calling thread waits for the response, 
+which means it's a blocking operation.
+
+WebClient: 
+Preferred for asynchronous communication in Spring applications. It allows non-blocking calls and better 
+resource utilization, especially useful in reactive programming and high-concurrency scenarios.
+
+When designing microservices, the choice between synchronous (RestTemplate) and asynchronous (WebClient) communication 
+depends on the specific use case, system requirements, and performance considerations.	
+	
+	
+	
+	
 @SpringBootApplication = @EnableAutoConfiguration + @SpringBootConfiguration + @ComponentScan
 
 
