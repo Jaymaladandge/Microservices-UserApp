@@ -185,6 +185,15 @@ Setting Up the Environment
 To take advantage of Spring’s @FeignClient, you'll first need to set up your development environment correctly. 
 This section outlines a step-by-step approach to get you started with a Spring Boot application and how to incorporate 
 the Feign client.
+	
+		  
+		  
+		  
+		  
+		  
+		  
+For smaller, simpler applications, a standalone application server may be sufficient and more convenient. For larger, more complex applications, using a dedicated web server in conjunction with an application server can provide better performance, scalability, and security.		  
+		  
 		  
 */	
 }

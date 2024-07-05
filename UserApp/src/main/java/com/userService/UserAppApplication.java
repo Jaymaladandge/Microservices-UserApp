@@ -16,3 +16,7 @@ public class UserAppApplication {
 	}
 
 }
+
+
+//A Spring Boot application packaged as a standalone JAR file with an embedded Tomcat server can handle both static 
+//and dynamic content.
