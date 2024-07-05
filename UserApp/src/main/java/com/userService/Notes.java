@@ -3,6 +3,8 @@ package com.userService;
 public class Notes {
 /*
 	
+	 Spring 5.3 + Hibernate 5.5.x  + MySQL Connector/J version 8.0.x
+	
 There are two primary types of communication methods used in microservices: synchronous and asynchronous. 	
 
 1. Synchronous Communication
