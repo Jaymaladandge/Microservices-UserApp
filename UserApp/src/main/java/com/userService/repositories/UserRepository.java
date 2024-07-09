@@ -45,8 +45,16 @@ public interface UserRepository extends JpaRepository<User, String> {
 //In Custom finder we just need to follow method convention. method starts with findBy and follow by property name.
 
 //Spring uses its @Repository annotation to automatically translate persistence-related exceptions into Spring's own 
-//DataAccessException hierarchy. This means that regardless of the underlying data access technology (JPA, JDBC, etc.), 
+//DataAccessException hierarchy. This means that regardless of the underlying data access technology (JPA, JDBC, Hibernate etc.), 
 //you can handle data access exceptions in a consistent manner.
+//When a @Repository annotated class throws a database-specific exception, Spring catches it and converts it into a more generic DataAccessException.
+//Spring's exception translation mechanism intercepts it and translates it.
+//BadSqlGrammarException : Thrown when SQL syntax errors occur.
+//DataIntegrityViolationException (ConstraintViolationException in Hibernate): Violations of database constraints, such as unique constraints or foreign key constraints.
+//DuplicateKeyException :  Inserting a duplicate key in a table with a unique constraint. etc
+
+
+
 
 
 //No Need for @Repository. when you extend JpaRepository, this is handled by the Spring Data infrastructure. The proxy 
