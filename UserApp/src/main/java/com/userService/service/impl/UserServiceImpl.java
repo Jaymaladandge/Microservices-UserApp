@@ -6,8 +6,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
@@ -23,6 +25,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.client.RestTemplate;
 
+import com.userService.controller.UserController;
 import com.userService.entities.Hotel;
 import com.userService.entities.Ratings;
 import com.userService.entities.User;
@@ -41,7 +44,8 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private RestTemplate restTemplate;
 
-	private Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
+	//private Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
+	private static final Logger logger = LogManager.getLogger(UserServiceImpl.class);
 	
 	@Autowired
 	private RatingService ratingService;
@@ -64,6 +68,7 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public List<User> getAllUsers() {
+		logger.info("============================getAllUsers() in UserServiceImpl==================================");
 		return userRepository.findAll();
 	}
 
