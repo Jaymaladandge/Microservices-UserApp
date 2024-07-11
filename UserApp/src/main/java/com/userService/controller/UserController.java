@@ -33,8 +33,6 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
-	//private Logger logger = LoggerFactory.getLogger(UserController.class);
-	//private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 	private static final Logger logger = LogManager.getLogger(UserController.class);
 	
 	private int retryCount = 1;
