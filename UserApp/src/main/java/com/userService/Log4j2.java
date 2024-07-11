@@ -5,6 +5,21 @@ public class Log4j2 {
 	
 /*
 
+
+
+I believe you are on right track in terms of using a separate thread pool for logging. In lot of products you will see the 
+asynchronous logging feature. Logs are accumulated and pushed to log files using a separate thread than the request thread.
+ Especially in prodcution environments, where are millions of incoming request and your response time need to be less than 
+ few seconds. You cannot afford anything such as logging to slow down the system. So the approach used is to add logs in 
+ a memory buffer and push them asynchronously in reasonably sized chunks.
+A word of caution while using thread pool for logging As multiple threads will be working on the log file(s) and on 
+a memory log buffer, you need to be careful about the logging. You need to add logs in a FIFO kind of a buffer to be sure that
+ logs are printed in the log files sorted by time stamp. Also make sure the file access is synchronized 
+ and you don't run into situation where log file is all upside down or messed up.
+
+
+
+
 In pom.xml
 Excluding Default Logging Dependencies: By excluding logback-classic and spring-boot-starter-logging, you are removing Logback, the default logging framework provided by Spring Boot, to avoid conflicts with Log4j2.
 Adding Log4j2 Dependencies: By adding log4j-api and log4j-core, you are including Log4j2 as the logging framework for your Spring Boot application.
