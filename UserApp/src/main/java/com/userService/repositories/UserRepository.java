@@ -34,12 +34,19 @@ public interface UserRepository extends JpaRepository<User, String> {
 	public User findByNameAndUserId(String name, int userId);
 }
 
+/*
+The @Modifying annotation is used to enhance the @Query annotation so that we can execute not only SELECT queries, 
+but also INSERT, UPDATE, DELETE, and even DDL queries.
+Methods using @Modifying should be executed within a transactional context, which is why the @Transactional annotation 
+is often used. This ensures the operation is executed as part of a transaction.
 
-//The @Modifying annotation is used to enhance the @Query annotation so that we can execute not only SELECT queries, 
-//but also INSERT, UPDATE, DELETE, and even DDL queries.
-//Methods using @Modifying should be executed within a transactional context, which is why the @Transactional annotation 
-//is often used. This ensures the operation is executed as part of a transaction.
-
+In many cases, when using JpaRepository or CrudRepository from Spring Data JPA, you don't need to explicitly annotate 
+your repository methods with @Transactional. This is because Spring Data JPA provides transaction management by default 
+for these repository methods. However, there are some cases where you might still need to use @Transactional.
+Custom Queries, Multiple Operations in a Service Method :If you have multiple repository operations within a single 
+service method that you want to execute in a single transaction, you should annotate the service method with 
+@Transactional., Custom Transaction Settings needs.
+*/
 
 
 //In Custom finder we just need to follow method convention. method starts with findBy and follow by property name.
