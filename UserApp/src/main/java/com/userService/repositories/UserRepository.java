@@ -40,12 +40,7 @@ but also INSERT, UPDATE, DELETE, and even DDL queries.
 Methods using @Modifying should be executed within a transactional context, which is why the @Transactional annotation 
 is often used. This ensures the operation is executed as part of a transaction.
 
-In many cases, when using JpaRepository or CrudRepository from Spring Data JPA, you don't need to explicitly annotate 
-your repository methods with @Transactional. This is because Spring Data JPA provides transaction management by default 
-for these repository methods. However, there are some cases where you might still need to use @Transactional.
-Custom Queries, Multiple Operations in a Service Method :If you have multiple repository operations within a single 
-service method that you want to execute in a single transaction, you should annotate the service method with 
-@Transactional., Custom Transaction Settings needs.
+
 */
 
 
@@ -80,3 +75,22 @@ service method that you want to execute in a single transaction, you should anno
 //to your main class of Spring Boot application.
 // By default, only unchecked exceptions (subclasses of RuntimeException) trigger a rollback. 
 //You can customize this behavior using the rollbackFor and noRollbackFor attributes.
+
+/*
+ 
+ In many cases, when using JpaRepository or CrudRepository from Spring Data JPA, you don't need to explicitly annotate 
+your repository methods with @Transactional. This is because Spring Data JPA provides transaction management by default 
+for these repository methods. However, there are some cases where you might still need to use @Transactional.
+Custom Queries, Multiple Operations in a Service Method :If you have multiple repository operations within a single 
+service method that you want to execute in a single transaction, you should annotate the service method with 
+@Transactional., Custom Transaction Settings needs.
+
+In a Spring Boot application, you do not need to explicitly use @EnableTransactionManagement as the auto-configuration provided 
+by spring-boot-starter-data-jpa takes care of it. You can simply use @Transactional in your service methods. However, 
+if you need custom transaction management settings, you can use @EnableTransactionManagement as required.
+
+ 
+ In a Spring Boot application, you do not need to explicitly use @EnableTransactionManagement as the auto-configuration provided 
+ by spring-boot-starter-data-jpa takes care of it. You can simply use @Transactional in your service methods. However, 
+ if you need custom transaction management settings, you can use @EnableTransactionManagement as required.
+ */
