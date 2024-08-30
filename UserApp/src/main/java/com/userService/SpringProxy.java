@@ -91,6 +91,9 @@ public class MyService {
     }
 }
 
+The @Autowired annotation injects a proxy of the MyService bean into the self field. This means that self is not just 
+a reference to the current object (this), but rather a reference to the proxy object created by Spring.
+
 
 Expose the Target Class with AOP Proxy: Ensure that the bean is exposed as an AOP proxy. 
 You can achieve this by using @EnableAspectJAutoProxy(proxyTargetClass=true) in your configuration class, 
@@ -99,5 +102,16 @@ forcing the use of CGLIB proxies.
 @EnableAspectJAutoProxy(proxyTargetClass = true)
 public class AppConfig {
 }
+
+
+
+even if only a single method in your entire class is annotated with @Transactional, Spring will still create 
+a proxy for the entire bean. This proxy will intercept calls to that specific method 
+
+
+
+
+
+
 */
 }

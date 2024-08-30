@@ -154,4 +154,5 @@ public class UserController {
 
 
 
-//Fallback method should match return type and parameter list with method to whom this fallback method is written(here getSingleUser()). 
+//Fallback method should match return type and parameter list with method to whom this fallback method is written(here getSingleUser()).
+

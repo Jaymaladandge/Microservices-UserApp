@@ -16,6 +16,11 @@ In asynchronous communication, the client sends a request without waiting for an
 the response is processed whenever it becomes available. This type of communication is useful for decoupling services and 
 improving system resilience.	
 	
+In asynchronous communication, the responsibility of sending the request and receiving the response is typically split 
+between different threads. This separation allows the system to be more efficient and scalable, as threads are not kept 
+waiting and can be reused for other tasks.
+	
+	
 RestTemplate: 
 Used for synchronous communication in Spring applications. The calling thread waits for the response, 
 which means it's a blocking operation.
@@ -26,6 +31,13 @@ resource utilization, especially useful in reactive programming and high-concurr
 
 When designing microservices, the choice between synchronous (RestTemplate) and asynchronous (WebClient) communication 
 depends on the specific use case, system requirements, and performance considerations.	
+	
+
+Feign clients are synchronous by default. When you use Feign to make HTTP calls to other microservices, the request will block the thread 
+until a response is received.
+However, you can make Feign asynchronous by customizing it with an ExecutorService or by using other libraries like Hystrix or 
+Resilience4j, which can enable asynchronous execution of requests. This allows the calling thread to continue execution while 
+the Feign client waits for a response in a different thread.
 	
 	
 	
@@ -215,11 +227,14 @@ the Feign client.
 	
 		  
 		  
+When you define a FeignClient, it handles HTTP requests under the hood, and traditionally, RestTemplate has been used to perform 
+these HTTP requests. However, with the evolution of the Spring ecosystem, newer versions of Feign might use WebClient instead of 
+RestTemplate, particularly as WebClient is the preferred approach for non-blocking, reactive communication in Spring WebFlux.		  
 		  
 		  
 		  
-		  
-For smaller, simpler applications, a standalone application server may be sufficient and more convenient. For larger, more complex applications, using a dedicated web server in conjunction with an application server can provide better performance, scalability, and security.		  
+For smaller, simpler applications, a standalone application server may be sufficient and more convenient. 
+For larger, more complex applications, using a dedicated web server in conjunction with an application server can provide better performance, scalability, and security.		  
 		  
 		  
 */	

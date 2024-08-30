@@ -302,7 +302,13 @@ appender.rolling.strategy.max: Sets the maximum number of rolled-over log files 
 This configuration sets up the root logger to log messages at the DEBUG level and send them to a rolling file appender named RollingFile. The RollingFile appender writes log messages to D://Data//logs//app.log and rolls over the log file when it reaches 100MB. Rolled-over files are named according to a pattern and compressed. The system retains up to 10 rolled-over log files. The log messages are formatted to include the date, time, log level, logger name, line number, and the message.
 
 
-
+FATAL: Severe errors that cause premature termination. The application should be terminated.
+ERROR: Error events that might still allow the application to continue running.
+WARN: Potentially harmful situations or warnings.
+INFO: Informational messages that highlight the progress of the application.
+DEBUG: Fine-grained informational events that are useful for debugging.
+TRACE: Finer-grained informational events than DEBUG. Very detailed.
+ALL: All levels of logging.
 
 
 
