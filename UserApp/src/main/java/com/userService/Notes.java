@@ -236,6 +236,12 @@ RestTemplate, particularly as WebClient is the preferred approach for non-blocki
 For smaller, simpler applications, a standalone application server may be sufficient and more convenient. 
 For larger, more complex applications, using a dedicated web server in conjunction with an application server can provide better performance, scalability, and security.		  
 		  
+
+Yes, you can use just the url in the @FeignClient annotation without specifying the name attribute. When you provide the url, 
+Feign will directly connect to that URL, bypassing service discovery mechanisms like Eureka or Consul.
+This approach is ideal when you want to communicate directly with a service using a static IP address or DNS name, 
+and there is no need for dynamic service discovery.
+		  
 		  
 */	
 }
